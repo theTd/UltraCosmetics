@@ -105,7 +105,9 @@ public class MenuMain extends Menu {
             ItemStack keys = ItemFactory.create(Material.TRIPWIRE_HOOK, (byte) 0x0, MessageManager.getMessage("Treasure-Keys"), "",
                     MessageManager.getMessage("Your-Keys").replace("%keys%", player.getKeys() + ""), getUltraCosmetics().isVaultLoaded() ?
                             "" : null, getUltraCosmetics().isVaultLoaded() ? MessageManager.getMessage("Click-Buy-Key") : null, getUltraCosmetics().isVaultLoaded() ? "" : null);
-            
+
+            ItemStack door = ItemFactory.create(Material.WOOD_DOOR, "&c&lRetour");
+
             putItem(inventory, 5, keys, (data) -> {
                 if (!getUltraCosmetics().isVaultLoaded() && player.getKeys() == 0) {
                     SoundUtil.playSound(player.getBukkitPlayer().getLocation(), Sounds.ANVIL_LAND, 0.2f, 1.2f);
@@ -121,6 +123,10 @@ public class MenuMain extends Menu {
                     return;
                 }
                 tryOpenChest(player.getBukkitPlayer());
+            });
+
+            putItem(inventory, getSize() - 1, door, (data) -> {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "cc open creatifmenu.yml " + player.getBukkitPlayer().getName());
             });
 
         }
