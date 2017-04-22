@@ -112,6 +112,7 @@ public abstract class Menu implements Listener {
         }
 
         event.setCancelled(true);
+
         ClickRunnable clickRunnable = clickRunnableMap.get(event.getInventory()).get(event.getCurrentItem());
 
         // Check clickrunnable isn't null.
@@ -122,6 +123,7 @@ public abstract class Menu implements Listener {
         Player player = (Player) event.getWhoClicked();
         UltraPlayer ultraPlayer = ultraCosmetics.getPlayerManager().getUltraPlayer(player);
         clickRunnable.run(new ClickData(event.getInventory(), ultraPlayer, event.getAction(), event.getCurrentItem(), event.getSlot()));
+        ((Player) event.getWhoClicked()).updateInventory();
     }
 
     public UltraCosmetics getUltraCosmetics() {
