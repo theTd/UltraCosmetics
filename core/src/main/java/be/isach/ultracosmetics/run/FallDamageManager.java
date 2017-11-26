@@ -13,26 +13,27 @@ import java.util.List;
  * Created by Sacha on 15/12/15.
  */
 public class FallDamageManager extends BukkitRunnable {
-	
+
 	public static List<Entity> noFallDamage = Collections.synchronizedList(new ArrayList<Entity>());
 	public static List<Entity> queue = Collections.synchronizedList(new ArrayList<Entity>());
-	
+
 	public static void addNoFall(Entity entity) {
 		if (!queue.contains(entity)
 		    && !noFallDamage.contains(entity)) {
 			queue.add(entity);
 		}
 	}
-	
+
 	public static boolean shouldBeProtected(Entity entity) {
 		return noFallDamage.contains(entity) || queue.contains(entity);
 	}
-	
+
 	@Override
 	public void run() {
 		List<Entity> toRemove = new ArrayList<>();
 		synchronized (noFallDamage) {
 			for (Entity ent : noFallDamage) {
+				if (ent == null) continue;
 				if (ent.isOnGround()) {
 					toRemove.add(ent);
 				}
