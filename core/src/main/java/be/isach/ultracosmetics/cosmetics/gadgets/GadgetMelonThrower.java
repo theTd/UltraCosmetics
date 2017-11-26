@@ -47,7 +47,7 @@ public class GadgetMelonThrower extends Gadget implements Listener {
 		    && event.getItem().getTicksLived() > 5
 		    && affectPlayers) {
 			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 5 * 20, 2));
-			SoundUtil.playSound(getPlayer().getLocation(), Sounds.BURP, 1.4f, 1.5f);
+			if (getPlayer() != null) SoundUtil.playSound(getPlayer().getLocation(), Sounds.BURP, 1.4f, 1.5f);
 			event.setCancelled(true);
 			event.getItem().remove();
 		}
