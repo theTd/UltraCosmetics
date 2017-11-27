@@ -36,7 +36,7 @@ public class GadgetTsunami extends Gadget {
 		final Vector v = getPlayer().getLocation().getDirection().normalize().multiply(0.3);
 		v.setY(0);
 		final Location loc = getPlayer().getLocation().subtract(0, 1, 0).add(v);
-		final int i = Bukkit.getScheduler().runTaskTimerAsynchronously(getUltraCosmetics(), () -> {
+		final int i = Bukkit.getScheduler().runTaskTimer(getUltraCosmetics(), () -> {
 			if (loc.getBlock().getType() != Material.AIR
 			    && loc.getBlock().getType().isSolid())
 				loc.add(0, 1, 0);

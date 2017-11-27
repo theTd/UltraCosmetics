@@ -140,7 +140,7 @@ public abstract class Suit extends Cosmetic<SuitType> implements Updatable {
 		}
 		
 		getOwner().setSuit(armorSlot, this);
-		runTaskTimerAsynchronously(getUltraCosmetics(), 0, 1);
+		runTaskTimer(getUltraCosmetics(), 0, 1);
 	}
 	
 	@Override

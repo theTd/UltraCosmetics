@@ -79,7 +79,7 @@ public abstract class MountCustomEntity<E extends org.bukkit.entity.Entity> exte
 				}
 			}
 		};
-		runnable.runTaskTimerAsynchronously(getUltraCosmetics(), 0, getType().getRepeatDelay());
+		runnable.runTaskTimer(getUltraCosmetics(), 0, getType().getRepeatDelay());
 
 		getOwner().setCurrentMount(this);
 	}
