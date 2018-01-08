@@ -3,6 +3,7 @@ package be.isach.ultracosmetics.run;
 import be.isach.ultracosmetics.UltraCosmeticsData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class FallDamageManager extends BukkitRunnable {
 		synchronized (noFallDamage) {
 			for (Entity ent : noFallDamage) {
 				if (ent == null) continue;
-				if (ent.isOnGround()) {
+				if (ent.isOnGround() || ((ent instanceof Player) && !((Player) ent).isOnline())) {
 					toRemove.add(ent);
 				}
 			}
