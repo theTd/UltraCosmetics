@@ -131,7 +131,8 @@ public abstract class Pet extends Cosmetic<PetType> implements Updatable {
 				} catch (Exception ignored) {
 					// Ignored.
 				}
-				
+
+				clear();
 				cancel();
 				return;
 			}
