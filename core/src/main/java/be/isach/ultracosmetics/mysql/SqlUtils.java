@@ -1,5 +1,6 @@
 package be.isach.ultracosmetics.mysql;
 
+import be.isach.ultracosmetics.UltraCosmeticsData;
 import be.isach.ultracosmetics.player.UltraPlayer;
 import org.bukkit.entity.Player;
 
@@ -25,6 +26,8 @@ public class SqlUtils {
 	}
 	
 	public void initStats(UltraPlayer up) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		Player p = up.getBukkitPlayer();
 		
 		try {
@@ -62,6 +65,8 @@ public class SqlUtils {
 	}
 	
 	public int getAmmo(int index, String name) {
+		if (UltraCosmeticsData.get().storageDisabled()) return 0;
+
 		ResultSet res = null;
 		try {
 			res = MySqlConnectionManager.getTable().select().where("id", index).execute();
@@ -79,6 +84,8 @@ public class SqlUtils {
 	}
 	
 	public String getPetName(int index, String pet) {
+		if (UltraCosmeticsData.get().storageDisabled()) return "Unknown";
+
 		ResultSet res = null;
 		try {
 			res = MySqlConnectionManager.getTable().select().where("id", index).execute();
@@ -96,6 +103,8 @@ public class SqlUtils {
 	}
 	
 	public boolean exists(int index) {
+		if (UltraCosmeticsData.get().storageDisabled()) return false;
+
 		ResultSet resultSet = null;
 		try {
 			resultSet = MySqlConnectionManager.getTable().select().where("id", index).execute();
@@ -113,6 +122,8 @@ public class SqlUtils {
 	}
 	
 	public void setName(int index, String pet, String name) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		DatabaseMetaData md;
 		ResultSet rs = null;
 		try {
@@ -137,6 +148,8 @@ public class SqlUtils {
 	}
 	
 	public int getKeys(int index) {
+		if (UltraCosmeticsData.get().storageDisabled()) return 0;
+
 		ResultSet res = null;
 		try {
 			res = MySqlConnectionManager.getTable().select().where("id", index).execute();
@@ -154,24 +167,34 @@ public class SqlUtils {
 	}
 	
 	public void removeKey(int index) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		MySqlConnectionManager.getTable().update().set("treasureKeys", getKeys(index) - 1).where("id", index).execute();
 	}
 	
 	public void addKey(int index) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		MySqlConnectionManager.getTable().update().set("treasureKeys", getKeys(index) + 1).where("id", index).execute();
 	}
 	
 	public void removeAmmo(int index, String name) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		MySqlConnectionManager.getTable().update().set(name.replace("_", ""), getAmmo(index, name) - 1)
 		                      .where("id", index).execute();
 	}
 	
 	public void addAmmo(int index, String name, int i) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		MySqlConnectionManager.getTable().update().set(name.replace("_", ""), getAmmo(index, name) + i)
 		                      .where("id", index).execute();
 	}
 	
 	public void setGadgetsEnabled(int index, boolean enabled) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		DatabaseMetaData md;
 		ResultSet rs = null;
 		try {
@@ -199,6 +222,8 @@ public class SqlUtils {
 	}
 	
 	public boolean hasGadgetsEnabled(int index) {
+		if (UltraCosmeticsData.get().storageDisabled()) return false;
+
 		DatabaseMetaData md;
 		ResultSet rs = null;
 		try {
@@ -227,6 +252,8 @@ public class SqlUtils {
 	}
 	
 	public void setSeeSelfMorph(int index, boolean enabled) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		DatabaseMetaData md;
 		ResultSet rs = null;
 		try {
@@ -254,6 +281,8 @@ public class SqlUtils {
 	}
 	
 	public boolean canSeeSelfMorph(int index) {
+		if (UltraCosmeticsData.get().storageDisabled()) return false;
+
 		DatabaseMetaData md;
 		ResultSet rs = null;
 		try {
@@ -282,6 +311,8 @@ public class SqlUtils {
 	}
 	
 	public Map<UUID, Integer> getIds() {
+		if (UltraCosmeticsData.get().storageDisabled()) return new HashMap<>();
+
 		Map<UUID, Integer> map = new HashMap<>();
 		ResultSet rs = MySqlConnectionManager.getTable().select("*").execute();
 		try {

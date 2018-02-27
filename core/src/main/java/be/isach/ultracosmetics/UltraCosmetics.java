@@ -175,17 +175,19 @@ public class UltraCosmetics extends JavaPlugin {
 		
 		// Set up economy if needed.
 		setupEconomy();
-		
-		if (!UltraCosmeticsData.get().usingFileStorage()) {
-			getSmartLogger().write("");
-			getSmartLogger().write("Connecting to MySQL database...");
-			
-			// Start MySQL.
-			this.mySqlConnectionManager = new MySqlConnectionManager(this);
-			mySqlConnectionManager.start();
-			
-			getSmartLogger().write("Connected to MySQL database.");
-			getSmartLogger().write("");
+
+		if (!UltraCosmeticsData.get().storageDisabled()) {
+			if (!UltraCosmeticsData.get().usingFileStorage()) {
+				getSmartLogger().write("");
+				getSmartLogger().write("Connecting to MySQL database...");
+
+				// Start MySQL.
+				this.mySqlConnectionManager = new MySqlConnectionManager(this);
+				mySqlConnectionManager.start();
+
+				getSmartLogger().write("Connected to MySQL database.");
+				getSmartLogger().write("");
+			}
 		}
 		
 		// Initialize UltraPlayers and give chest (if needed).

@@ -1,6 +1,7 @@
 package be.isach.ultracosmetics.mysql;
 
 import be.isach.ultracosmetics.UltraCosmetics;
+import be.isach.ultracosmetics.UltraCosmeticsData;
 import be.isach.ultracosmetics.config.SettingsManager;
 import be.isach.ultracosmetics.cosmetics.type.GadgetType;
 import be.isach.ultracosmetics.manager.SqlLoader;
@@ -65,6 +66,8 @@ public class MySqlConnectionManager extends BukkitRunnable {
 	
 	@Override
 	public void run() {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		try {
 			String hostname = String.valueOf(SettingsManager.getConfig().get("Ammo-System-For-Gadgets.MySQL.hostname"));
 			String portNumber = String.valueOf(SettingsManager.getConfig().get("Ammo-System-For-Gadgets.MySQL.port"));

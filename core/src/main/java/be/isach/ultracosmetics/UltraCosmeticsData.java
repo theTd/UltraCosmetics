@@ -41,6 +41,11 @@ public class UltraCosmeticsData {
 	 * Determines if Ammo Use is enabled.
 	 */
 	private boolean ammoEnabled;
+
+	/**
+	 * Determines whether information storage system is disabled
+	 */
+	private boolean storageDisabled = false;
 	
 	/**
 	 * Determines if File Storage is enabled.
@@ -167,7 +172,8 @@ public class UltraCosmeticsData {
 	}
 	
 	public void initConfigFields() {
-		this.fileStorage = SettingsManager.getConfig().getString("Ammo-System-For-Gadgets.System").equalsIgnoreCase("file");
+		this.storageDisabled = SettingsManager.getConfig().getString("Ammo-System-For-Gadgets.System").equalsIgnoreCase("disabled");
+		this.fileStorage = !storageDisabled && SettingsManager.getConfig().getString("Ammo-System-For-Gadgets.System").equalsIgnoreCase("file");
 		this.placeHolderColor = SettingsManager.getConfig().getBoolean("Chat-Cosmetic-PlaceHolder-Color");
 		this.ammoEnabled = SettingsManager.getConfig().getBoolean("Ammo-System-For-Gadgets.Enabled");
 		this.cooldownInBar = SettingsManager.getConfig().getBoolean("Categories.Gadgets.Cooldown-In-ActionBar");
@@ -191,6 +197,10 @@ public class UltraCosmeticsData {
 	
 	public boolean usingCustomCommandBackArrow() {
 		return customCommandBackArrow;
+	}
+
+	public boolean storageDisabled() {
+		return storageDisabled;
 	}
 	
 	public boolean usingFileStorage() {

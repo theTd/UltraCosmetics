@@ -1,6 +1,7 @@
 package be.isach.ultracosmetics.manager;
 
 import be.isach.ultracosmetics.UltraCosmetics;
+import be.isach.ultracosmetics.UltraCosmeticsData;
 import be.isach.ultracosmetics.player.UltraPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -54,6 +55,8 @@ public class SqlLoader {
 	
 	
 	public void addPreloadPlayer(UUID uuid) {
+		if (UltraCosmeticsData.get().storageDisabled()) return;
+
 		Player p = Bukkit.getPlayer(uuid);
 		if (p != null && p.isOnline()) {
 			loadList.add(uuid.toString());
